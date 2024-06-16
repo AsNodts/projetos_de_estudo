@@ -36,10 +36,17 @@ def validador_cpf(usuario_digitou):
         return '\033[31mCPF invalido\033[m'
 
 
+# Lista de CPFs inválidos conhecidos
+invalidos = ['00000000000', '11111111111', '99999999999', '000.000.000-00', '111.111.111-11', '999.999.999-99']
+
 while True:
     try:
         cpf = input('Digite o CPF para ser validado: ').strip()
-        if len(cpf) <= 14 or len(cpf) >= 11:
+        if cpf in invalidos or len(cpf) < 11 or len(cpf) > 14:
+            print('CPF INVALIDO')
+            continue
+        else:
             print(validador_cpf(cpf))
+        
     except IndexError:
         print('Digite apenas numeros ou como no exemplo: xxx.xxx.xxx-xx')
